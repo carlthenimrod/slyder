@@ -2,5 +2,7 @@
 $(function(){
 
 	//activate slyder
-	$('#element').slyder();
+	$('#element').slyder({
+		responsive: true
+	});
 });

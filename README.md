@@ -6,7 +6,7 @@ slyder dynamically generates a image gallery based on an element. The slideshow 
 
 ### Release info:
 
-The current release is version 1.0. This is the inital release and more features and updates are planned.
+The current release is version 1.01. This is the inital release and more features and updates are planned.
 
 
 ### Examples:
@@ -101,6 +101,12 @@ List of renameable CSS class names with their default values:
 
 	$('#element').slyder({
 		imgSrc: false
+	});
+
+**preloadAll**: Accepts a boolean value, determines whether to preload first image or all images.
+
+	$('#element').slyder({
+		preloadAll: false
 	});
 
 **render**: Accepts a string, contains options for different rendering templates.

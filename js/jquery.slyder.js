@@ -64,6 +64,8 @@
 			imgClick: false,
 			imgSrc: false,
 
+			preloadAll: false,
+
 			render: false,
 			resolution: 1.777,
 			responsive: false,
@@ -447,7 +449,34 @@
 
 				that.modules.img.append(img);
 
-				dfd.resolve();
+				//preload all images
+				if(that.config.preloadAll){
+
+					(function(){
+
+						var srcs = [],
+							i,
+							l;
+
+						for(i = 0, l = that.linkList.length; i < l; ++i){
+
+							//add to srcs array
+							srcs.push($(that.linkList[i]).find('img').attr('src'));
+
+							//preload all srcs
+							that.utils.preload(srcs).done(function(){
+
+								dfd.resolve();
+							});
+						}
+
+					})();
+				}
+				//just resolve
+				else{
+
+					dfd.resolve();
+				}
 			});			
 
 			return dfd.promise();
@@ -923,7 +952,7 @@
 		{
 
 			var that = this,
-				total = 30,
+				total = 15,
 				widthBox = Math.ceil(this.config.imgWidth),
 				heightBox = Math.ceil(this.config.imgHeight / total),
 				top,
