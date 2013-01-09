@@ -6,7 +6,7 @@ slyder dynamically generates a image gallery based on an element. The slideshow 
 
 ### Release info:
 
-The current release is version 1.01. This is the inital release and more features and updates are planned.
+The current release is version 1.02. This is the inital release and more features and updates are planned.
 
 
 ### Examples:
@@ -16,18 +16,12 @@ Basic slyder usuage on an empty element, the plugin will do the rest.
 
 	$('#element').slyder();
 
-Add a JavaScript object to achieve additional functionality, some options are nested in objects.
+Add a JavaScript object to achieve additional functionality.
 
 	$('#element').slyder({
 		autoStart: true,
 		html5: false,
-		render: 'default',
-		speed: {
-
-			auto: 500,
-			load: 1000,
-			transition: 300	
-		}
+		render: 'default'
 	});
 
 
@@ -64,26 +58,33 @@ $('#element').slyder({
 	autoStart: true
 });
 
-**classNames**: Accepts a object, holds all of the CSS class names. Allows you to change the name of the classes for the slyder.
+**class Options**: Accepts a string, holds CSS class names. Allows you to change the name of the classes for the slyder.
 
 	$('#element').slyder({
-		classNames: {
-			ctn: 'custom-class-gallery'
-		}
+		classActive: 'sly-active',
+		classActiveThumb: 'sly-active-thumb',
+		classClone: 'sly-clone',
+		classCtn: 'sly-ctn',
+		classCtrl: 'sly-ctrl',
+		classPrev: 'sly-prev',
+		classNext: 'sly-next',
+		classImg: 'sly-img',
+		classThumbs: 'sly-thumbs',
+		classTxt: 'sly-txt'
 	});
 
 List of renameable CSS class names with their default values:
 
-	- active: 'sly-active',
-	- activeThumb: 'sly-active-thumb',
-	- clone: 'sly-clone',
-	- ctn: 'sly-ctn',
-	- ctrl: 'sly-ctrl',
-	- ctrlPrev: 'sly-prev',
-	- ctrlNext: 'sly-next',
-	- img: 'sly-img',
-	- thumbs: 'sly-thumbs',
-	- txt: 'sly-txt'
+	- classActive: 'sly-active'
+	- classActiveThumb: 'sly-active-thumb'
+	- classClone: 'sly-clone'
+	- classCtn: 'sly-ctn'
+	- classCtrl: 'sly-ctrl'
+	- classPrev: 'sly-prev'
+	- classNext: 'sly-next'
+	- classImg: 'sly-img'
+	- classThumbs: 'sly-thumbs'
+	- classTxt: 'sly-txt'
 
 **html5**: Accepts a boolean value, true creates sections/nav elements, alternatively false creates divs.
 
@@ -132,16 +133,19 @@ List of renameable CSS class names with their default values:
 		responsive: false
 	});
 
-**speed**: Accepts object, sets the speeds in milliseconds of the animations.
+**Speed Options**: Accepts a number, sets the speeds in milliseconds for the animations.
 
 	$('#element').slyder({
-		speed: {
-
-			auto: 3000,
-			load: 300,
-			transition: 500
-		}
+		speedAuto: 3000,
+		speedLoad: 300,
+		speedTransition: 500
 	});
+
+List of adjustable speeds:
+
+	- speedAuto: 3000
+	- speedLoad: 300
+	- speedTransition: 500
 
 ### Build Contents:
 ----

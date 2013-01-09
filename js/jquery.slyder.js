@@ -24,7 +24,7 @@
 			$.when(that.build()).then(function(){
 
 				//if autoStart is enabled, start auto
-				if(that.config.autoStart) that.autoStart = win.setInterval(function(){ that.auto() }, that.config.speed.auto);
+				if(that.config.autoStart) that.autoStart = win.setInterval(function(){ that.auto() }, that.config.speedAuto);
 
 				//create events
 				that.events();
@@ -45,19 +45,16 @@
 			animationType: false,
 			autoStart: true,
 
-			classNames: {
-
-				active: 'sly-active',
-				activeThumb: 'sly-active-thumb',
-				clone: 'sly-clone',
-				ctn: 'sly-ctn',
-				ctrl: 'sly-ctrl',
-				ctrlPrev: 'sly-prev',
-				ctrlNext: 'sly-next',
-				img: 'sly-img',
-				thumbs: 'sly-thumbs',
-				txt: 'sly-txt'
-			},
+			classActive: 'sly-active',
+			classActiveThumb: 'sly-active-thumb',
+			classClone: 'sly-clone',
+			classCtn: 'sly-ctn',
+			classCtrl: 'sly-ctrl',
+			classPrev: 'sly-prev',
+			classNext: 'sly-next',
+			classImg: 'sly-img',
+			classThumbs: 'sly-thumbs',
+			classTxt: 'sly-txt',
 
 			html5: true,
 
@@ -70,12 +67,9 @@
 			resolution: 1.777,
 			responsive: false,
 
-			speed: {
-
-				auto: 3000,
-				load: 300,
-				transition: 500
-			}
+			speedAuto: 3000,
+			speedLoad: 300,
+			speedTransition: 500
 		},
 
 		build: function(){
@@ -90,7 +84,7 @@
 				that.$elem.show(); that.settings(); that.$elem.hide();				
 				
 				//fade in $elem
-				that.$elem.fadeIn(that.config.speed.load, function(){
+				that.$elem.fadeIn(that.config.speedLoad, function(){
 
 					dfd.resolve();
 				});
@@ -223,9 +217,9 @@
 
 			this.modules.activeThumb = link;
 
-			this.modules.thumbs.find('a').removeClass(this.config.classNames.activeThumb);
+			this.modules.thumbs.find('a').removeClass(this.config.classActiveThumb);
 
-			this.modules.activeThumb.addClass(this.config.classNames.activeThumb);
+			this.modules.activeThumb.addClass(this.config.classActiveThumb);
 
 			this.transition();
 		},
@@ -268,9 +262,9 @@
 
 				this.modules.activeThumb = previous;
 
-				this.modules.thumbs.find('a').removeClass(this.config.classNames.activeThumb);
+				this.modules.thumbs.find('a').removeClass(this.config.classActiveThumb);
 
-				this.modules.activeThumb.addClass(this.config.classNames.activeThumb);
+				this.modules.activeThumb.addClass(this.config.classActiveThumb);
 			}
 			else{
 
@@ -292,9 +286,9 @@
 
 				this.modules.activeThumb = next;
 
-				this.modules.thumbs.find('a').removeClass(this.config.classNames.activeThumb);
+				this.modules.thumbs.find('a').removeClass(this.config.classActiveThumb);
 
-				this.modules.activeThumb.addClass(this.config.classNames.activeThumb);
+				this.modules.activeThumb.addClass(this.config.classActiveThumb);
 			}
 			else{
 
@@ -371,7 +365,7 @@
 
 			this.modules.ctn.attr({
 
-				'class': this.config.classNames.ctn
+				'class': this.config.classCtn
 			});
 
 			this.$elem.append(this.modules.ctn);
@@ -390,17 +384,17 @@
 
 			this.modules.ctrl.attr({
 
-				'class': this.config.classNames.ctrl
+				'class': this.config.classCtrl
 			});
 
 			this.modules.ctrlPrev = $('<div>', {
 
-				'class': this.config.classNames.ctrlPrev
+				'class': this.config.classPrev
 			});
 
 			this.modules.ctrlNext = $('<div>', {
 
-				'class': this.config.classNames.ctrlNext
+				'class': this.config.classNext
 			});
 
 			this.modules.ctrl.append(this.modules.ctrlPrev);
@@ -427,7 +421,7 @@
 
 			that.modules.img.attr({
 
-				'class': that.config.classNames.img
+				'class': that.config.classImg
 			});
 
 			that.modules.ctn.append(that.modules.img);
@@ -440,7 +434,7 @@
 
 				img = $('<img/>', {
 
-					'class': that.config.classNames.active,
+					'class': that.config.classActive,
 					'src': src
 				});
 
@@ -504,7 +498,7 @@
 			this.modules.txt.attr({
 
 				'alt': text,
-				'class': this.config.classNames.txt,
+				'class': this.config.classTxt,
 				'title': text
 			}).html(text);
 
@@ -531,7 +525,7 @@
 
 			that.modules.thumbs.attr({
 
-				'class': that.config.classNames.thumbs
+				'class': that.config.classThumbs
 			});
 
 			that.modules.ctn.append(that.modules.thumbs);
@@ -569,7 +563,7 @@
 				that.modules.activeThumb = $(active);
 
 				//add active class
-				$(active).addClass(that.config.classNames.activeThumb);
+				$(active).addClass(that.config.classActiveThumb);
 
 				dfd.resolve();
 			});
@@ -609,7 +603,7 @@
 						});
 
 						//remove active class
-						img.removeClass(that.config.classNames.active);
+						img.removeClass(that.config.classActive);
 
 						//append image to image module
 						that.modules.img.append(img);
@@ -622,12 +616,12 @@
 							
 							that.modules.active.remove();
 
-							that.modules.next.addClass(that.config.classNames.active);
+							that.modules.next.addClass(that.config.classActive);
 
 							that.modules.active = that.modules.next;
 
 							//if autoStart is enabled, start auto
-							if(that.config.autoStart) that.autoStart = win.setInterval(function(){ that.auto() }, that.config.speed.auto);
+							if(that.config.autoStart) that.autoStart = win.setInterval(function(){ that.auto() }, that.config.speedAuto);
 
 							that.transition();
 						});			
@@ -731,7 +725,7 @@
 
 				var clone = $('<div/>', {
 
-					'class': this.config.classNames.clone
+					'class': this.config.classClone
 				}).append(this.modules.active.clone());
 
 				clone.css({
@@ -748,10 +742,10 @@
 
 				clone.appendTo(this.modules.img);
 
-				delay = i * this.config.speed.transition / total;
+				delay = i * this.config.speedTransition / total;
 
 				if(i === total - 1){
-					clone.delay(delay).animate({left: leftMove, width: 0}, this.config.speed.transition, function(){
+					clone.delay(delay).animate({left: leftMove, width: 0}, this.config.speedTransition, function(){
 
 						$(this).remove();
 
@@ -759,7 +753,7 @@
 					});
 				}
 				else{
-					clone.delay(delay).animate({left: leftMove, width: 0}, this.config.speed.transition, function(){				
+					clone.delay(delay).animate({left: leftMove, width: 0}, this.config.speedTransition, function(){				
 
 						$(this).remove();
 					});
@@ -788,7 +782,7 @@
 
 				var clone = $('<div/>', {
 
-					'class': this.config.classNames.clone
+					'class': this.config.classClone
 				}).append(this.modules.active.clone());
 
 				clone.css({
@@ -805,10 +799,10 @@
 
 				clone.appendTo(this.modules.img);
 
-				delay = i * this.config.speed.transition / total;
+				delay = i * this.config.speedTransition / total;
 
 				if(i === total - 1){
-					clone.delay(delay).animate({top: topMove, height: 0}, this.config.speed.transition, function(){
+					clone.delay(delay).animate({top: topMove, height: 0}, this.config.speedTransition, function(){
 
 						$(this).remove();
 
@@ -816,7 +810,7 @@
 					});
 				}
 				else{
-					clone.delay(delay).animate({top: topMove, height: 0}, this.config.speed.transition, function(){				
+					clone.delay(delay).animate({top: topMove, height: 0}, this.config.speedTransition, function(){				
 
 						$(this).remove();
 					});
@@ -830,7 +824,7 @@
 
 			var that = this;
 
-			that.modules.active.fadeOut(that.config.speed.transition, function(){
+			that.modules.active.fadeOut(that.config.speedTransition, function(){
 
 				that.animating.resolve();
 			});
@@ -853,7 +847,7 @@
 
 				var clone = $('<div/>', {
 
-					'class': this.config.classNames.clone
+					'class': this.config.classClone
 				}).append(this.modules.active.clone());
 
 				clone.css({
@@ -870,11 +864,11 @@
 
 				clone.appendTo(this.modules.img);
 
-				delay = i * this.config.speed.transition / total;
+				delay = i * this.config.speedTransition / total;
 
 				if(i === total - 1){
 
-					clone.delay(delay).fadeOut(this.config.speed.transition, function(){
+					clone.delay(delay).fadeOut(this.config.speedTransition, function(){
 
 						$(this).remove();
 
@@ -883,7 +877,7 @@
 				}
 				else{
 
-					clone.delay(delay).fadeOut(this.config.speed.transition, function(){
+					clone.delay(delay).fadeOut(this.config.speedTransition, function(){
 
 						$(this).remove();
 					});
@@ -910,7 +904,7 @@
 
 				var clone = $('<div/>', {
 
-					'class': this.config.classNames.clone
+					'class': this.config.classClone
 				}).append(this.modules.active.clone());
 
 				clone.css({
@@ -927,10 +921,10 @@
 
 				clone.appendTo(this.modules.img);
 
-				delay = i * this.config.speed.transition / total;
+				delay = i * this.config.speedTransition / total;
 
 				if(i === total - 1){
-					clone.delay(delay).animate({top: heightBox, opacity: 0.5}, this.config.speed.transition, function(){
+					clone.delay(delay).animate({top: heightBox, opacity: 0.5}, this.config.speedTransition, function(){
 
 						$(this).remove();
 
@@ -938,7 +932,7 @@
 					});
 				}
 				else{
-					clone.delay(delay).animate({top: heightBox, opacity: 0.5}, this.config.speed.transition, function(){				
+					clone.delay(delay).animate({top: heightBox, opacity: 0.5}, this.config.speedTransition, function(){				
 
 						$(this).remove();
 					});
@@ -966,7 +960,7 @@
 
 				var clone = $('<div/>', {
 
-					'class': this.config.classNames.clone
+					'class': this.config.classClone
 				}).append(this.modules.active.clone());
 
 				clone.css({
@@ -983,10 +977,10 @@
 
 				clone.appendTo(this.modules.img);
 
-				delay = i * this.config.speed.transition / total;
+				delay = i * this.config.speedTransition / total;
 
 				if(i === total - 1){
-					clone.delay(delay).animate({left: '-' + widthBox, opacity: 0}, this.config.speed.transition, function(){
+					clone.delay(delay).animate({left: '-' + widthBox, opacity: 0}, this.config.speedTransition, function(){
 
 						$(this).remove();
 
@@ -994,7 +988,7 @@
 					});
 				}
 				else{
-					clone.delay(delay).animate({left: '-' + widthBox, opacity: 0}, this.config.speed.transition, function(){				
+					clone.delay(delay).animate({left: '-' + widthBox, opacity: 0}, this.config.speedTransition, function(){				
 
 						$(this).remove();
 					});
@@ -1018,14 +1012,14 @@
 
 			for(i = 0; i < total; ++i){
 
-				delay = i * that.config.speed.transition / total;
+				delay = i * that.config.speedTransition / total;
 
 				left = widthBox * i;
 				leftImg = -(widthBox * i);
 
 				clone = $('<div/>', {
 
-					'class': that.config.classNames.clone
+					'class': that.config.classClone
 				}).append(that.modules.active.clone());
 
 				clone.css({
@@ -1044,7 +1038,7 @@
 
 				if(i === total - 1){
 
-					clone.delay(delay).animate({top: '-' + heightBox, opacity: 0.5}, that.config.speed.transition, function(){
+					clone.delay(delay).animate({top: '-' + heightBox, opacity: 0.5}, that.config.speedTransition, function(){
 
 						$(this).remove();
 
@@ -1053,7 +1047,7 @@
 				}
 				else{
 
-					clone.delay(delay).animate({top: '-' + heightBox, opacity: 0.5}, that.config.speed.transition, function(){				
+					clone.delay(delay).animate({top: '-' + heightBox, opacity: 0.5}, that.config.speedTransition, function(){				
 
 						$(this).remove();
 					});
